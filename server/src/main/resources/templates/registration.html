@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Регистрация</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+</head>
+<body>
+	<div class="container">
+		<div class="registration-content-wrap">
+			<form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="registration-form" role="form">
+				<div class="registration-title">Регистрация</div>
+				<div class="registration-form-group">
+					<input type="text" th:field="*{firstName}" placeholder="име" class="registration-input"/>
+					<label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="validation-message"></label>
+                </div>
+                <div class="registration-form-group">
+					<input type="text" th:field="*{lastName}" placeholder="фамилия" class="registration-input"/>
+					<label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="validation-message"></label>
+                </div>
+                <div class="registration-form-group">
+					<input type="text" th:field="*{phoneNumber}" placeholder="телефон" class="registration-input"/> 
+					<label th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="validation-message"></label>
+                </div>
+                <div class="registration-form-group">
+					<input type="password" th:field="*{password}" placeholder="парола" class="registration-input"/> 
+					<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+                </div>
+                <div class="registration-form-group">
+					<button type="submit" class="registration-button">Регистрирай потребител</button>
+                </div>
+				<div class="registration-form-group">
+					<h2></h2><span class="success-message" th:utext="${successMessage}"></span>
+				</div>
+			</form>
+			<form th:action="@{/}" method="get" class="login-container">
+				<button class="login-button" type="Submit">Към Вход</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

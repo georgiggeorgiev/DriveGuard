@@ -1,0 +1,121 @@
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #100e17;
+}
+
+.registration-content-wrap
+{
+	max-width: 50%;
+	margin: auto;
+	margin-top: 5%;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #100e17;
+	border-radius: 30px;
+	background: linear-gradient(90deg, #8E2DE2 0%, #4A00E0 100%);
+	display: flex;
+	flex-direction: column;
+}
+
+.registration-form
+{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	padding: 50px;
+}
+
+.registration-title
+{
+	color: #eee;
+	border: 3px solid #240b36;
+	border-radius: 60px;
+	margin-bottom: 30px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.registration-form-group
+{
+	display: flex;
+	flex-direction: column;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.registration-input
+{
+	border-width: 3px;
+	border-radius: 10px;
+	border-color: #240b36;
+	text-align: center;
+	padding: 7px;
+	margin-left: 15%;
+	margin-right: 15%;
+	font-weight: bold;
+}
+
+.validation-message
+{
+	font-weight: bolder;
+	color: #000;
+	text-decoration: underline #ED213A;
+}
+
+.registration-button
+{
+	background: linear-gradient(#eee, #aaa);
+	font-weight: bolder;
+	border-width: 4px;
+	border-color: #240b36;
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+.registration-button:hover
+{
+	background: linear-gradient(90deg, #ED213A 0%, #93291E 100%);
+	text-decoration: underline;
+}
+
+.success-message
+{
+	padding: 5px;
+	border-width: 3px;
+	border-color: #aaa;
+	border-radius: 10px;
+	font-weight: bolder;
+}
+
+.login-container
+{
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+
+.login-button
+{
+	background: linear-gradient(#eee, #aaa);
+	font-weight: bolder;
+	border-width: 4px;
+	border-color: #240b36;
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px;
+	margin-left: 30%;
+	margin-right: 30%;
+}
+
+.login-button:hover
+{
+	background: linear-gradient(90deg, #ED213A 0%, #93291E 100%);
+	text-decoration: underline;
+}

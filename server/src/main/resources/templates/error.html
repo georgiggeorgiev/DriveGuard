@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Грешка</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/error.css}"/>
+</head>
+<body>
+	<div class="error-content-wrap">
+		<h1>Error occurred</h1>
+		<h4>Настъпи грешка. Моля свържете се с администратор.</h4>
+		<form th:action="@{/login}" method="get" class="error-form">
+			<button class="button" type="Submit">Към Вход</button>
+		</form>
+		<form th:action="@{/registration}" method="get" class="error-form">
+			<button class="button" type="Submit">Регистрация</button>
+		</form>
+	</div>
+	</body>
+</html>

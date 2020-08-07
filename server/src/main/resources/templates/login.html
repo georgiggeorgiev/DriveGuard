@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Вход</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+</head>
+<body>
+	<div class="container">
+		<img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
+		<div class="login-content-wrap">
+			<form th:action="@{/login}" method="POST" class="login-form">
+				<h3 class="login-title">Добре дошли</h3>
+				<br/>
+				<input type="text" id="user_name" name="user_name" placeholder="телефон" class="login-input"/>
+				<br/>
+				<input type="password" th:placeholder="парола" id="password" name="password" class="login-input"/>
+				<br/>
+				<div align="center" th:if="${param.error}">
+					<p style="font-size: 20;font-weight: bolder;">Невалидни данни, моля опитайте отново</p>
+				</div>
+				<button class="login-button" name="Submit" value="Login" type="Submit">Вход</button>
+			</form>
+			<form th:action="@{/registration}" method="get" class="registration-container">
+				<button type="Submit" class="registration-button">Регистрация</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
