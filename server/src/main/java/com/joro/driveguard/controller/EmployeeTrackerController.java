@@ -1,17 +1,15 @@
 package com.joro.driveguard.controller;
 
-import com.joro.driveguard.model.DriverFocusLoss;
-import com.joro.driveguard.model.Location;
-import com.joro.driveguard.model.dto.DtoFactory;
-import com.joro.driveguard.service.UserService;
+import com.joro.driveguard.model.dto.DriverFocusLossDTO;
+import com.joro.driveguard.service.DriverFocusLossService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import java.time.LocalDateTime;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class EmployeeTrackerController
@@ -20,26 +18,28 @@ public class EmployeeTrackerController
     private SimpMessagingTemplate smt;
 
     @Autowired
-    private UserService userService;
+    private DriverFocusLossService driverFocusLossService;
 
-    private void broadcastUpdate(String message)
+    private void broadcastUpdate(DriverFocusLossDTO dto)
     {
-        // TODO Testing
-        DriverFocusLoss driverFocusLoss = DriverFocusLoss.builder()
-                .id(1)
-                .localDateTime(LocalDateTime.now())
-                .location(Location.builder().id(1).latitude(10.0).longitude(20.0).build())
-                .user(userService.findUserByPhoneNumber("0882595206"))
-                .build();
-
-        smt.convertAndSend("/topic/tracker", DtoFactory.fromDriverFocusLoss(driverFocusLoss));
+        smt.convertAndSend("/topic/tracker", dto);
     }
 
-    @GetMapping("/tracker")
-    private ResponseEntity apiTest()
+    @PostMapping("/tracker")
+    private ResponseEntity tracker(@RequestBody DriverFocusLossDTO dto)
     {
-        // TODO curl -v localhost:8080/tracker
-        broadcastUpdate("TEST");
+        // TODO: Disabled saving for testing
+//        if (driverFocusLossService.saveDriverFocusLossFromDTO(dto) != null)
+//        {
+//            broadcastUpdate(dto);
+//            return new ResponseEntity(HttpStatus.ACCEPTED);
+//        }
+//        else
+//        {
+//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+//        }
+
+        broadcastUpdate(dto);
         return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 }

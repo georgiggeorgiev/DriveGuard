@@ -1,25 +1,17 @@
 package com.joro.driveguard.model.dto;
 
-import com.joro.driveguard.model.DriverFocusLoss;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
+@NoArgsConstructor
 public class DriverFocusLossDTO
 {
-    private final LocalDateTime localDateTime;
-    private final double latitude;
-    private final double longitude;
-    private final String userPhoneNumber;
-    private final String userFirstName;
-
-    DriverFocusLossDTO(DriverFocusLoss driverFocusLoss)
-    {
-        localDateTime = driverFocusLoss.getLocalDateTime();
-        latitude = driverFocusLoss.getLocation().getLatitude();
-        longitude = driverFocusLoss.getLocation().getLongitude();
-        userPhoneNumber = driverFocusLoss.getUser().getPhoneNumber();
-        userFirstName = driverFocusLoss.getUser().getFirstName();
-    }
+    private LocalDateTime localDateTime;
+    private double latitude;
+    private double longitude;
+    private String userPhoneNumber;
+    private String userFirstName;
 }
