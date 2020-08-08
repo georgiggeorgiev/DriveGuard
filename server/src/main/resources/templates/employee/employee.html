@@ -5,57 +5,54 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Мониторинг</title>
 	<link th:href="@{/css/employee.css}" rel="stylesheet">
+	<link href="/webjars/leaflet/1.6.0/dist/leaflet.css" rel="stylesheet">
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
-    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+	<script src="/webjars/leaflet/1.6.0/dist/leaflet.js"></script>
 	<script type="text/javascript" th:src="@{/js/employee.js}"></script>
 </head>
 <body>
+	<form th:action="@{/logout}" method="get" class="logout-form">
+		<button type="Submit" class="logout-button">Изход</button>
+	</form>
 	<div class="grid-content-wrap">
 		<div class="grid-header">
-			<div>
-				Col1
+			<div class="grid-row-delete-col">
+				<!-- Delete Row Column -->
 			</div>
 			<div>
-				Col2
+				Време
 			</div>
 			<div>
-				Col3
+				Име
 			</div>
 			<div>
-				Col4
+				Фамилия
+			</div>
+			<div>
+				Телефон
 			</div>
 		</div>
 		<div class="grid-table">
-			<div class="grid-row">
-				<div>
-					1
+			<div class="grid-row" id="default-row">
+				<div class="grid-row-delete-col">
+					<!-- Delete Row Column -->
 				</div>
 				<div>
-					2
+					[няма данни]
 				</div>
 				<div>
-					3
+					[няма данни]
 				</div>
 				<div>
-					4
-				</div>
-			</div>
-			<div class="grid-row">
-				<div>
-					1
+					[няма данни]
 				</div>
 				<div>
-					2
-				</div>
-				<div>
-					3
-				</div>
-				<div>
-					4
+					[няма данни]
 				</div>
 			</div>
 		</div>
 	</div>
-	<button id="testbtn">ADD ROW</button>
+	<div id="map" class="map" style="height: 30rem; margin-left: 5%; margin-right: 5%; border: 10px solid #ED213A; border-radius: 10px;"></div>
 </body>
 </html>

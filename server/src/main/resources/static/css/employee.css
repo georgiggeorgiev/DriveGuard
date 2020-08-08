@@ -6,7 +6,13 @@ body
 
 .grid-content-wrap
 {
-	margin: 30px;
+	max-height: 10rem;
+	overflow: auto;
+	position: relative;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	margin-left: 5%;
+	margin-right: 5%;
 	border-width: 2px 1px 2px 2px;
 	border-style: solid;
 	border-color: #100e17;
@@ -56,4 +62,34 @@ body
 .grid-row > div
 {
 	border-top: 1px solid #100e17;
+}
+
+.grid-row-delete-col
+{
+	max-width: 2rem;
+	outline: none !important;
+	text-decoration: overline;
+}
+
+.logout-form
+{
+	text-align: right;
+	margin-right: 5%;
+}
+
+.logout-button
+{
+	background: linear-gradient(#eee, #aaa);
+	font-weight: bolder;
+	border-width: 4px;
+	border-color: #240b36;
+	border-radius: 10px;
+	text-align: center;
+	padding: 5px;
+}
+
+.logout-button:hover
+{
+	background: linear-gradient(90deg, #ED213A 0%, #93291E 100%);
+	text-decoration: underline;
 }
