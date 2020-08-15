@@ -38,6 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
             authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers(loginPage).permitAll()
+            .antMatchers("/androidLogin").permitAll()
             .antMatchers("/registration").permitAll()
             .antMatchers("/tracker").permitAll()
             .antMatchers("/admin/**").hasAuthority("ADMIN")

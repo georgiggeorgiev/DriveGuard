@@ -1,8 +1,11 @@
 package com.joro.driveguard.controller;
 
 import com.joro.driveguard.model.dto.DriverFocusLossDTO;
+import com.joro.driveguard.model.dto.DriverFocusLossValidationDTO;
+import com.joro.driveguard.model.dto.UserRequestValidationDTO;
 import com.joro.driveguard.service.DriverFocusLossService;
 
+import com.joro.driveguard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +23,21 @@ public class EmployeeTrackerController
     @Autowired
     private DriverFocusLossService driverFocusLossService;
 
+    @Autowired
+    private UserService userService;
+
     private void broadcastUpdate(DriverFocusLossDTO dto)
     {
         smt.convertAndSend("/topic/tracker", dto);
     }
 
     @PostMapping("/tracker")
-    private ResponseEntity tracker(@RequestBody DriverFocusLossDTO dto)
+    private ResponseEntity tracker(@RequestBody DriverFocusLossValidationDTO dto)
     {
+        if (!userService.isValidUserRequestValidationDTO(new UserRequestValidationDTO(dto.getUserPhoneNumber(), dto.getAPIKey())))
+        {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
         // TODO: Disabled saving for testing
 //        if (driverFocusLossService.saveDriverFocusLossFromDTO(dto) != null)
 //        {
