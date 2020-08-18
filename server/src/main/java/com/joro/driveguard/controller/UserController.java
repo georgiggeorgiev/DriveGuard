@@ -3,6 +3,7 @@ package com.joro.driveguard.controller;
 import com.joro.driveguard.Utilities;
 import com.joro.driveguard.model.User;
 import com.joro.driveguard.model.dto.UserCredentialsDTO;
+import com.joro.driveguard.model.dto.UserSharedPreferencesDTO;
 import com.joro.driveguard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,14 +24,14 @@ public class UserController
 
     @PostMapping("/androidLogin")
     @ResponseBody
-    public String androidLogin(@RequestBody UserCredentialsDTO dto)
+    public UserSharedPreferencesDTO androidLogin(@RequestBody UserCredentialsDTO dto)
     {
         User user = userService.isValidUserCredentialsDTO(dto);
         if (user == null)
         {
             return null;
         }
-        return user.getAPIKey();
+        return new UserSharedPreferencesDTO(user.getFirstName(), user.getPhoneNumber(), user.getAPIKey());
     }
 
     @GetMapping(value = {"/", "/login"})

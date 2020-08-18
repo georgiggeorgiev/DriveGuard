@@ -3,6 +3,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
 
     <application
         android:allowBackup="true"
@@ -10,8 +12,14 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config">
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="face" />
+
         <activity
-            android:name="com.joro.driveguard.MainActivity"
+            android:name="com.joro.driveguard.StartupActivity"
+            android:theme="@android:style/Theme.NoDisplay"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.joro.driveguard.LoginActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="com.joro.driveguard.MainActivity" />
     </application>
 
 </manifest>

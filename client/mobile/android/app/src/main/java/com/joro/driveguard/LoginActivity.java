@@ -14,10 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
@@ -29,7 +28,6 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity
 {
     private static final String TAG = "LoginActivity";
-    private static final int REQUEST_SIGNUP = 0;
 
     @BindView(R.id.input_phone)
     EditText phoneText;
@@ -86,13 +84,15 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
-    public void loginComplete(final String APIKey, final ProgressDialog progressDialog)
+    public void loginComplete(final JSONObject response, final ProgressDialog progressDialog)
     {
+        Log.d(TAG, "Login complete");
+
         new android.os.Handler().postDelayed
         (
                 () ->
                 {
-                    if (APIKey == null || APIKey.isEmpty())
+                    if ((response == null) || !response.has("firstName") || !response.has("phoneNumber") || !response.has("apikey"))
                     {
                         onLoginFailed();
                     }
@@ -100,18 +100,29 @@ public class LoginActivity extends AppCompatActivity
                     {
                         try
                         {
-                            Log.d(TAG, "Store API Key " + APIKey);
+                            final String userFirstName = response.getString("firstName");
+                            final String userPhoneNumber =  response.getString("phoneNumber");
+                            final String APIKey = response.getString("apikey");
+
+                            Log.d(TAG, "First name: " + userFirstName + " Phone number: " + userPhoneNumber + " APIKey " + APIKey);
+
                             SharedPreferences sharedPreferences = getSharedPreferences("DATA", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean("APIKeySaved", true);
+                            editor.putString("userFirstName", userFirstName);
+                            editor.putString("userPhoneNumber", userPhoneNumber);
                             editor.putString("APIKey", APIKey);
                             editor.apply();
 
+                            Constants.userFirstName = userFirstName;
+                            Constants.userPhoneNumber = userPhoneNumber;
                             Constants.APIKey = APIKey;
+
                             onLoginSuccess();
                         }
                         catch (Exception e)
                         {
+                            Log.d(TAG, e.toString());
                             onLoginFailed();
                         }
                     }
@@ -119,19 +130,6 @@ public class LoginActivity extends AppCompatActivity
                 },
             3000
         );
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if (requestCode == REQUEST_SIGNUP)
-        {
-            if (resultCode == RESULT_OK)
-            {
-                // Return to MainActivity
-                this.finish();
-            }
-        }
     }
 
     @Override
@@ -144,6 +142,8 @@ public class LoginActivity extends AppCompatActivity
     public void onLoginSuccess()
     {
         loginButton.setEnabled(true);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -192,31 +192,19 @@ public class LoginActivity extends AppCompatActivity
         jsonObject.put("phoneNumber", phone);
         jsonObject.put("password", password);
 
-        StringRequest stringRequest = new StringRequest
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
         (
-            Request.Method.POST,
-            url,
-            response -> loginComplete(response, progressDialog),
-            error ->
-            {
-                Log.d(TAG, error.toString());
-                loginComplete(null, progressDialog);
-            }
-        )
-        {
-            @Override
-            public byte[] getBody() throws AuthFailureError
-            {
-                return jsonObject.toString().getBytes();
-            }
+          Request.Method.POST,
+          url,
+          jsonObject,
+          response -> loginComplete(response, progressDialog),
+          error ->
+          {
+              Log.d(TAG, error.toString());
+              loginComplete(null, progressDialog);
+          }
+        );
 
-            @Override
-            public String getBodyContentType()
-            {
-                return "application/json";
-            }
-        };
-
-        requestQueue.add(stringRequest);
+        requestQueue.add(jsonObjectRequest);
     }
 }
