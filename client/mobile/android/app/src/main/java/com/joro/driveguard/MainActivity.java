@@ -193,12 +193,12 @@ public final class MainActivity extends AppCompatActivity
         if (isFrontFacing)
         {
             // Front facing
-            Tracker<Face> tracker = new FaceTracker(graphicsOverlay);
+            Tracker<Face> tracker = new FaceTracker(MainActivity.this, graphicsOverlay);
             processor = new LargestFaceFocusingProcessor.Builder(detector, tracker).build();
         } else
         {
             // Rear facing
-            MultiProcessor.Factory<Face> factory = face -> new FaceTracker(graphicsOverlay);
+            MultiProcessor.Factory<Face> factory = face -> new FaceTracker(MainActivity.this, graphicsOverlay);
             processor = new MultiProcessor.Builder<>(factory).build();
         }
 

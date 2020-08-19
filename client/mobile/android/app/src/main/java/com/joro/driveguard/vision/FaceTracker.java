@@ -1,22 +1,25 @@
 package com.joro.driveguard.vision;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.PointF;
 
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 import com.google.android.gms.vision.face.Landmark;
+import com.joro.driveguard.WarningController;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class FaceTracker extends Tracker<Face>
 {
-    private static final float EYE_CLOSED_THRESHOLD = 0.4f;
+    private static final float EYE_CLOSED_THRESHOLD = 0.5f;
 
     private GraphicsOverlay overlay;
     private EyeGraphics eyeGraphics;
+    private WarningController warningController;
 
     // Record the previously seen proportions of the landmark locations relative to the bounding box
     // of the face.  These proportions can be used to approximate where the landmarks are within the
@@ -29,9 +32,10 @@ public class FaceTracker extends Tracker<Face>
     private boolean wasLeftOpen = true;
     private boolean wasRightOpen = true;
 
-    public FaceTracker(GraphicsOverlay overlay)
+    public FaceTracker(Context context, GraphicsOverlay overlay)
     {
         this.overlay = overlay;
+        warningController = new WarningController(context);
     }
 
     @Override
@@ -76,6 +80,7 @@ public class FaceTracker extends Tracker<Face>
         }
 
         eyeGraphics.updateEyes(leftPosition, isLeftOpen, rightPosition, isRightOpen);
+        warningController.update(!(isLeftOpen && isRightOpen));
     }
 
     @Override
