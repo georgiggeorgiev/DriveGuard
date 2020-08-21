@@ -47,6 +47,7 @@ public class DriverFocusLossService
         Location location = Location.builder()
                 .latitude(dto.getLatitude())
                 .longitude(dto.getLongitude())
+                .address(dto.getAddress())
                 .build();
 
         DriverFocusLoss driverFocusLoss = DriverFocusLoss.builder()

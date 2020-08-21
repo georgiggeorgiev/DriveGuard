@@ -41,8 +41,8 @@ const createRow = (rowData) => {
 	const firstNameCol = document.createElement("div");
 	firstNameCol.textContent = rowData["userFirstName"];
 
-	const familyNameCol = document.createElement("div");
-	familyNameCol.textContent = "*****";
+	const addressCol = document.createElement("div");
+	addressCol.textContent = rowData["address"] === "" ? "[няма данни]" : rowData["address"];
 
 	const phoneNumberCol = document.createElement("div");
 	phoneNumberCol.textContent = rowData["userPhoneNumber"];
@@ -50,7 +50,7 @@ const createRow = (rowData) => {
 	gridRow.appendChild(deleteCol);
 	gridRow.appendChild(timeCol);
 	gridRow.appendChild(firstNameCol);
-	gridRow.appendChild(familyNameCol);
+	gridRow.appendChild(addressCol);
 	gridRow.appendChild(phoneNumberCol);
 
 	gridRow.addEventListener("click", function() {

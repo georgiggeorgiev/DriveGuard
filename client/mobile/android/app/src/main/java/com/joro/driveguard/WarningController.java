@@ -3,6 +3,8 @@ package com.joro.driveguard;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,7 +23,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Locale;
 
 public class WarningController
 {
@@ -36,6 +40,7 @@ public class WarningController
 
     private LocationManager locationManager;
     private final LocationListener locationListener;
+    private final Geocoder geocoder;
 
     public WarningController(Context context)
     {
@@ -89,6 +94,8 @@ public class WarningController
 
             }
         };
+
+        geocoder = new Geocoder(context, new Locale("bg", "BG"));
     }
 
     public void update(boolean areBothEyesClosed)
@@ -160,6 +167,17 @@ public class WarningController
         final double latitude = location.getLatitude();
         final double longitude = location.getLongitude();
 
+        String address;
+        try
+        {
+            address = geocoder.getFromLocation(latitude, longitude, 1).get(0).getAddressLine(0);
+        }
+        catch (IOException e)
+        {
+            Log.d(TAG, "Could not obtain address");
+            address = "";
+        }
+
         final String userPhoneNumber = Constants.userPhoneNumber;
         if (userPhoneNumber == null || userPhoneNumber.isEmpty())
         {
@@ -182,6 +200,7 @@ public class WarningController
         {
             jsonObject.put("localDateTime", localDateTime);
             jsonObject.put("latitude", latitude);
+            jsonObject.put("address", address);
             jsonObject.put("longitude", longitude);
             jsonObject.put("userPhoneNumber", userPhoneNumber);
             jsonObject.put("userFirstName", userFirstName);

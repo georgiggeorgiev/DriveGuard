@@ -32,6 +32,9 @@ public class Location
     @Column(name = "longitude")
     private Double longitude;
 
+    @Column(name = "address")
+    private String address;
+
     @OneToOne(mappedBy = "location")
     private DriverFocusLoss driverFocusLoss;
 }

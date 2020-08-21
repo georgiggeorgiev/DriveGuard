@@ -38,18 +38,14 @@ public class EmployeeTrackerController
         {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        // TODO: Disabled saving for testing
-//        if (driverFocusLossService.saveDriverFocusLossFromDTO(dto) != null)
-//        {
-//            broadcastUpdate(dto);
-//            return new ResponseEntity(HttpStatus.ACCEPTED);
-//        }
-//        else
-//        {
-//            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//        }
-
-        broadcastUpdate(dto);
-        return new ResponseEntity(HttpStatus.ACCEPTED);
+        if (driverFocusLossService.saveDriverFocusLossFromDTO(dto) != null)
+        {
+            broadcastUpdate(dto);
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        }
+        else
+        {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
     }
 }

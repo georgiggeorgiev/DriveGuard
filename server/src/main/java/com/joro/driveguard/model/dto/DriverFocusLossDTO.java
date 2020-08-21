@@ -12,6 +12,7 @@ public class DriverFocusLossDTO
     private LocalDateTime localDateTime;
     private double latitude;
     private double longitude;
+    private String address;
     private String userPhoneNumber;
     private String userFirstName;
 }
