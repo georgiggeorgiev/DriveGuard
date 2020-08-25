@@ -32,7 +32,7 @@ public class EmployeeTrackerController
     }
 
     @PostMapping("/tracker")
-    private ResponseEntity tracker(@RequestBody DriverFocusLossValidationDTO dto)
+    public ResponseEntity tracker(@RequestBody DriverFocusLossValidationDTO dto)
     {
         if (!userService.isValidUserRequestValidationDTO(new UserRequestValidationDTO(dto.getUserPhoneNumber(), dto.getAPIKey())))
         {
