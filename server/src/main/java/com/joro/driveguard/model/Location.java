@@ -1,5 +1,6 @@
 package com.joro.driveguard.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,5 +37,6 @@ public class Location
     private String address;
 
     @OneToOne(mappedBy = "location")
+    @JsonBackReference
     private DriverFocusLoss driverFocusLoss;
 }

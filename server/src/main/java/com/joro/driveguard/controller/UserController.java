@@ -92,4 +92,12 @@ public class UserController
         modelAndView.setViewName("employee/employee");
         return modelAndView;
     }
+
+    @GetMapping(value = "/employee/analytics")
+    public ModelAndView analytics()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("employee/analytics");
+        return modelAndView;
+    }
 }

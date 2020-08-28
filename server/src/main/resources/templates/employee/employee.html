@@ -12,9 +12,14 @@
 	<script type="text/javascript" th:src="@{/js/employee.js}"></script>
 </head>
 <body>
-	<form th:action="@{/logout}" method="get" class="logout-form">
-		<button type="Submit" class="logout-button">Изход</button>
-	</form>
+	<div class="form-container">
+		<form th:action="@{/employee/analytics}" method="get">
+			<button type="Submit" class="button">Към Анализ на данни</button>
+		</form>
+		<form th:action="@{/logout}" method="get">
+			<button type="Submit" class="button">Изход</button>
+		</form>
+	</div>
 	<div class="grid-content-wrap">
 		<div class="grid-header">
 			<div class="grid-row-delete-col">

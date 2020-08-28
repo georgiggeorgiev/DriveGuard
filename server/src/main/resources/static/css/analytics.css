@@ -24,7 +24,7 @@ body
 .grid-table
 {
 	display: flex;
-	flex-direction: column-reverse; /* latest row added on top */
+	flex-direction: column;
 }
 
 .grid-header, .grid-row
@@ -62,13 +62,6 @@ body
 .grid-row > div
 {
 	border-top: 1px solid #100e17;
-}
-
-.grid-row-delete-col
-{
-	max-width: 2rem;
-	outline: none !important;
-	text-decoration: overline;
 }
 
 .form-container

@@ -46,6 +46,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter
             .antMatchers("/user/**").hasAuthority("ADMIN")
             .antMatchers("/employee/**").hasAuthority("EMPLOYEE")
             .antMatchers("user/**").hasAuthority("USER")
+            .antMatchers("/locationClusters").permitAll()
+            .antMatchers("/driverFocusLossByHour").permitAll()
             .anyRequest()
             .authenticated()
             .and().csrf().disable()

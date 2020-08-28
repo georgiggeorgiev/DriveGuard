@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Анализ</title>
+	<link th:href="@{/css/analytics.css}" rel="stylesheet">
+	<link href="/webjars/leaflet/1.6.0/dist/leaflet.css" rel="stylesheet">
+	<script src="/webjars/leaflet/1.6.0/dist/leaflet.js"></script>
+    <link href="/webjars/leaflet-markercluster/1.4.1/MarkerCluster.css" rel="stylesheet">
+    <link href="/webjars/leaflet-markercluster/1.4.1/MarkerCluster.Default.css" rel="stylesheet">
+    <script src="/webjars/leaflet-markercluster/1.4.1/leaflet.markercluster.js"></script>
+	<script type="text/javascript" th:src="@{/js/analytics.js}"></script>
+</head>
+<body>
+	<div class="form-container">
+		<form th:action="@{/employee/employee}" method="get">
+			<button type="Submit" class="button">Към Мониторинг</button>
+		</form>
+		<form th:action="@{/logout}" method="get">
+			<button type="Submit" class="button">Изход</button>
+		</form>
+	</div>
+	<div class="grid-content-wrap">
+		<div class="grid-header">
+			<div>
+				Час
+			</div>
+			<div>
+				Брой загуби на концентрация
+			</div>
+		</div>
+		<div class="grid-table">
+			<!-- initial empty -->
+		</div>
+	</div>
+	<div id="map" class="map" style="height: 30rem; margin-left: 5%; margin-right: 5%; border: 10px solid #ED213A; border-radius: 10px;"></div>
+</body>
+</html>
