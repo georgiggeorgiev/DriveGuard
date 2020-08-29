@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Locale;
 
 public class WarningController
@@ -167,14 +168,42 @@ public class WarningController
         final double latitude = location.getLatitude();
         final double longitude = location.getLongitude();
 
-        String address;
-        try
+        String address = null;
+        if (Geocoder.isPresent())
         {
-            address = geocoder.getFromLocation(latitude, longitude, 1).get(0).getAddressLine(0);
+            try
+            {
+                final List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 3);
+                if (addresses != null && !addresses.isEmpty())
+                {
+                    for (final Address a : addresses)
+                    {
+                        if (a != null)
+                        {
+                            final String addressLine = a.getAddressLine(0);
+                            if (addressLine != null && !addressLine.isEmpty())
+                            {
+                                address = addressLine;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (address == null)
+                {
+                    Log.d(TAG, "Could not obtain address");
+                    address = "";
+                }
+            }
+            catch (IOException e)
+            {
+                Log.d(TAG, "IOException");
+                address = "";
+            }
         }
-        catch (IOException e)
+        else
         {
-            Log.d(TAG, "Could not obtain address");
+            Log.d(TAG, "Geocoder not present");
             address = "";
         }
 
