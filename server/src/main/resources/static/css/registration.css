@@ -26,6 +26,13 @@ body
 	padding: 50px;
 }
 
+.registration-form > img
+{
+	align-self: center;
+    height: 60%;
+	width: 60%;
+}
+
 .registration-title
 {
 	color: #eee;

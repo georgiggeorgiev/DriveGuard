@@ -26,14 +26,11 @@ body
 	padding: 50px;
 }
 
-.login-title
+.login-form > img
 {
-	color: #eee;
-	border: 3px solid #240b36;
-	border-radius: 60px;
-	margin-bottom: 30px;
-	font-size: 30px;
-	font-weight: bold;
+	align-self: center;
+    height: 60%;
+	width: 60%;
 }
 
 .login-input

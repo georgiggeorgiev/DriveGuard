@@ -8,6 +8,7 @@
 	<div class="container">
 		<div class="registration-content-wrap">
 			<form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="registration-form" role="form">
+				<img th:src="@{/images/logo.png}">
 				<div class="registration-title">Регистрация</div>
 				<div class="registration-form-group">
 					<input type="text" th:field="*{firstName}" placeholder="име" class="registration-input"/>
